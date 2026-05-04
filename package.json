@@ -5,11 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev:pages": "npx wrangler pages dev .",
-    "deploy:pages": "npx wrangler pages deploy ."
+    "dev": "wrangler pages dev . --port 8788",
+    "deploy": "wrangler pages deploy . --project-name shopee-link-generate"
   },
   "dependencies": {
     "express": "^4.21.2",
     "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.101.0"
   }
 }
