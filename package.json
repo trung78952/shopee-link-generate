@@ -4,7 +4,9 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev:pages": "npx wrangler pages dev .",
+    "deploy:pages": "npx wrangler pages deploy ."
   },
   "dependencies": {
     "express": "^4.21.2",
