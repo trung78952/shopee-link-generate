@@ -55,6 +55,38 @@
             font-weight: 700;
         }
 
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1.5px solid #f1c4b8;
+            background: #fff7f5;
+            border-radius: 10px;
+            color: #a04b37;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #ee4d2db4;
+            color: #fff;
+            border-color: #ee4d2d;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
         label {
             display: block;
             font-size: 0.9rem;
@@ -218,6 +250,17 @@
             display: none;
         }
 
+        .status-msg {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: #fff7f0;
+            border: 1.5px solid #ffd8b2;
+            border-radius: 10px;
+            color: #9c5b16;
+            font-size: 0.88rem;
+            display: none;
+        }
+
         .divider {
             border: none;
             border-top: 1.5px solid #eee;
@@ -294,61 +337,136 @@
             <h1>Shopee Link Voucher</h1>
         </div>
 
-        <!-- Input -->
-        <label for="productUrl">Link sản phẩm Shopee</label>
-        <div class="input-row">
-            <input type="text" id="productUrl" placeholder="Dán link sản phẩm vào đây..." />
-            <!-- <button class="btn-copy-input" onclick="pasteFromClipboard()">📋 Dán</button> -->
+        <div class="tabs">
+            <button id="tabFacebook" class="tab-btn active" onclick="setActiveTab('facebook')"
+                style="display: flex;align-items: center;justify-content: center;"><img style="margin-right: 8px;"
+                    height="20px" src="assets/fb.svg" alt="Facebook"> Mã
+                Facebook</button>
+            <button id="tabYoutube" class="tab-btn" onclick="setActiveTab('youtube')"
+                style="display: flex;align-items: center;justify-content: center;"><img style="margin-right: 8px;"
+                    height="20px" src="assets/yt.svg" alt="YouTube"> Mã
+                YouTube</button>
         </div>
 
-        <!-- Generate button -->
-        <button class="btn-generate" id="btnGenerate" onclick="generateLink()">
-            <span id="btnText">🔗 Tạo Link</span>
-            <div class="spinner" id="spinner"></div>
-        </button>
+        <div id="panelFacebook" class="tab-panel active">
+            <!-- Input -->
+            <label for="productUrl">Link sản phẩm Shopee</label>
+            <div class="input-row">
+                <input type="text" id="productUrl" placeholder="Dán link sản phẩm vào đây..." />
+            </div>
 
-        <!-- Error -->
-        <div class="error-msg" id="errorMsg"></div>
+            <!-- Generate button -->
+            <button class="btn-generate" id="btnGenerate" onclick="generateLink()">
+                <span id="btnText">🔗 Tạo Link</span>
+                <div class="spinner" id="spinner"></div>
+            </button>
 
-        <!-- Result -->
-        <div class="result-section" id="resultSection">
-            <div class="result-label">Link có mã voucher của bạn:</div>
-            <div class="result-box" id="resultLink"></div>
-            <div class="action-row">
-                <button class="btn-copy-result" onclick="copyResult()">📋 Sao chép link</button>
-                <button class="btn-buy" onclick="buyNow()">🛒 Mua ngay</button>
+            <!-- Error -->
+            <div class="error-msg" id="errorMsg"></div>
+
+            <!-- Result -->
+            <div class="result-section" id="resultSection">
+                <div class="result-label">Link có mã voucher của bạn:</div>
+                <div class="result-box" id="resultLink"></div>
+                <div class="action-row">
+                    <button class="btn-copy-result" onclick="copyResult()">📋 Sao chép link</button>
+                    <button class="btn-buy" onclick="buyNow()">🛒 Mua ngay</button>
+                </div>
+            </div>
+            <hr class="divider" />
+            <!-- Hướng dẫn -->
+            <div class="guide-section">
+                <h2>📖 Hướng dẫn sử dụng</h2>
+                <!-- Bạn tự điền nội dung hướng dẫn vào đây -->
+                <ol>
+                    <li>Copy link sản phẩm muốn mua từ thanh địa chỉ trình duyệt hoặc nút chia sẻ trên app.</li>
+                    <li>Dán link vào ô nhập phía trên rồi bấm <strong>Tạo Link</strong>.</li>
+                    <li>Copy link vừa được tạo và dán link vào <a href="https://www.facebook.com/share/p/183Kw6G2YC/"
+                            target="_blank"> <strong>Bài đăng này</strong></a></li>
+                    <li>Click vào link trong bài đăng để mua hàng và nhận ưu đãi.</li>
+                </ol>
+            </div>
+            <!-- Banner / Hình ảnh -->
+            <div class="banner-section">
+                <!-- Thay src bằng đường dẫn hình ảnh của bạn -->
+                <img src="assets/shopee-voucher.png" alt="Banner" />
             </div>
         </div>
 
-        <hr class="divider" />
+        <div id="panelYoutube" class="tab-panel">
+            <!-- Input -->
+            <label for="youtubeProductUrl">Link sản phẩm Shopee</label>
+            <div class="input-row">
+                <input type="text" id="youtubeProductUrl" placeholder="Dán link sản phẩm vào đây..." />
+            </div>
 
-        <!-- Hướng dẫn -->
-        <div class="guide-section">
-            <h2>📖 Hướng dẫn sử dụng</h2>
-            <!-- Bạn tự điền nội dung hướng dẫn vào đây -->
-            <ol>
-                <li>Copy link sản phẩm muốn mua từ thanh địa chỉ trình duyệt hoặc nút chia sẻ trên app.</li>
-                <li>Dán link vào ô nhập phía trên rồi bấm <strong>Tạo Link</strong>.</li>
-                <li>Copy link vừa được tạo và dán link vào <a href="https://www.facebook.com/share/p/183Kw6G2YC/"
-                        target="_blank"> <strong>Bài đăng này</strong></a></li>
-                <li>Click vào link trong bài đăng để mua hàng và nhận ưu đãi.</li>
-            </ol>
+            <!-- Generate button -->
+            <button class="btn-generate" id="btnGenerateYoutube" onclick="generateYoutubeLink()">
+                <span id="btnTextYoutube">🔗 Tạo Link</span>
+                <div class="spinner" id="spinnerYoutube"></div>
+            </button>
+
+            <div class="status-msg" id="youtubeStatusMsg"></div>
+
+            <!-- Error -->
+            <div class="error-msg" id="errorMsgYoutube"></div>
+
+            <!-- Result -->
+            <div class="result-section" id="resultSectionYoutube">
+                <div class="result-label">Link YouTube voucher của bạn:</div>
+                <div class="result-box" id="resultLinkYoutube"></div>
+                <div class="action-row">
+                    <button class="btn-copy-result" onclick="copyYoutubeResult()">📋 Sao chép link</button>
+                    <button class="btn-buy" onclick="buyYoutubeNow()">🛒 Mở link lấy mã</button>
+                </div>
+            </div>
+            <hr class="divider" />
+            <!-- Hướng dẫn -->
+            <div class="guide-section">
+                <h2>📖 Hướng dẫn sử dụng</h2>
+                <!-- Bạn tự điền nội dung hướng dẫn vào đây -->
+                <ol>
+                    <li>Copy link sản phẩm muốn mua từ nút chia sẻ trên app.</li>
+                    <li>Dán link vào ô nhập phía trên rồi bấm <strong>Tạo Link</strong>.</li>
+                    <li>Click vào nút <strong>Mở link lấy mã</strong> để nhận mã voucher.</li>
+                </ol>
+            </div>
+            <!-- Banner / Hình ảnh -->
+            <div class="banner-section">
+                <!-- Thay src bằng đường dẫn hình ảnh của bạn -->
+                <img src="assets/yt-vouchers.jpg" alt="Banner" />
+            </div>
         </div>
 
-        <!-- Banner / Hình ảnh -->
-        <div class="banner-section">
-            <!-- Thay src bằng đường dẫn hình ảnh của bạn -->
-            <img src="assets/shopee-voucher.png" alt="Banner" />
-        </div>
+
+
+
+
     </div>
 
     <div class="toast" id="toast"></div>
 
     <script>
         const AFFILIATE_IDS = '17398570407';
+        const YOUTUBE_AFFILIATE_ID = '17398570407';
         const API_BASE = '/api/generate';
+        const YOUTUBE_REQUEST_API = '/api/youtube-request';
+        const YOUTUBE_STATUS_API = '/api/youtube-status';
+        const YOUTUBE_POLL_INTERVAL_MS = 2000;
+        const YOUTUBE_MAX_POLL = 40;
 
         let generatedLink = '';
+        let generatedYoutubeLink = '';
+
+        function setActiveTab(tab) {
+            const isFacebook = tab === 'facebook';
+
+            document.getElementById('tabFacebook').classList.toggle('active', isFacebook);
+            document.getElementById('tabYoutube').classList.toggle('active', !isFacebook);
+
+            document.getElementById('panelFacebook').classList.toggle('active', isFacebook);
+            document.getElementById('panelYoutube').classList.toggle('active', !isFacebook);
+        }
 
         async function generateLink() {
             const urlInput = document.getElementById('productUrl').value.trim();
@@ -422,6 +540,132 @@
             }
         }
 
+        async function generateYoutubeLink() {
+            const urlInput = document.getElementById('youtubeProductUrl').value.trim();
+            const errorMsg = document.getElementById('errorMsgYoutube');
+            const statusMsg = document.getElementById('youtubeStatusMsg');
+            const resultSection = document.getElementById('resultSectionYoutube');
+            const btnGenerate = document.getElementById('btnGenerateYoutube');
+            const btnText = document.getElementById('btnTextYoutube');
+            const spinner = document.getElementById('spinnerYoutube');
+
+            errorMsg.style.display = 'none';
+            statusMsg.style.display = 'none';
+            resultSection.style.display = 'none';
+            generatedYoutubeLink = '';
+
+            if (!urlInput) {
+                showErrorById('errorMsgYoutube', 'Vui lòng nhập link sản phẩm Shopee.');
+                return;
+            }
+
+            try {
+                new URL(urlInput);
+            } catch {
+                showErrorById('errorMsgYoutube', 'Link không hợp lệ. Vui lòng kiểm tra lại.');
+                return;
+            }
+
+            btnGenerate.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+
+            try {
+                showStatus('Đang gửi yêu cầu tạo mã YouTube...');
+                const requestRes = await fetch(YOUTUBE_REQUEST_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: urlInput
+                    })
+                });
+
+                if (!requestRes.ok) {
+                    throw new Error(`Không tạo được job YouTube: ${requestRes.status}`);
+                }
+
+                const requestData = await requestRes.json();
+                const jobId = requestData.job_id;
+
+                if (!jobId) {
+                    throw new Error('API không trả về job_id.');
+                }
+
+                showStatus('Đang xử lý link YouTube, vui lòng đợi...');
+                const completedData = await pollYoutubeJob(jobId);
+                const finalLink = replaceAffiliateId(completedData.youtube_link, YOUTUBE_AFFILIATE_ID);
+
+                generatedYoutubeLink = finalLink;
+                document.getElementById('resultLinkYoutube').textContent = finalLink;
+                resultSection.style.display = 'block';
+                statusMsg.style.display = 'none';
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } catch (err) {
+                if (err instanceof TypeError) {
+                    const isLocalFile = window.location.protocol === 'file:';
+                    if (isLocalFile) {
+                        showErrorById('errorMsgYoutube', 'Trang đang chạy bằng file:// nên không gọi được API. Hãy mở qua server.');
+                    } else {
+                        showErrorById('errorMsgYoutube', 'Không thể gọi API YouTube proxy. Vui lòng thử lại.');
+                    }
+                } else {
+                    showErrorById('errorMsgYoutube', err.message || 'Đã có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            } finally {
+                btnGenerate.disabled = false;
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+            }
+
+            function showStatus(message) {
+                statusMsg.textContent = message;
+                statusMsg.style.display = 'block';
+            }
+        }
+
+        async function pollYoutubeJob(jobId) {
+            for (let attempt = 1; attempt <= YOUTUBE_MAX_POLL; attempt++) {
+                const statusRes = await fetch(`${YOUTUBE_STATUS_API}?job_id=${encodeURIComponent(jobId)}`);
+                if (!statusRes.ok) {
+                    throw new Error(`Lỗi kiểm tra trạng thái: ${statusRes.status}`);
+                }
+
+                const statusData = await statusRes.json();
+                const status = statusData.status;
+
+                if (status === 'complete') {
+                    if (!statusData.youtube_link) {
+                        throw new Error('Job đã complete nhưng chưa có youtube_link.');
+                    }
+                    return statusData;
+                }
+
+                if (status === 'error' || status === 'failed') {
+                    throw new Error(statusData.error || 'Job tạo link YouTube thất bại.');
+                }
+
+                if (statusData.error) {
+                    throw new Error(statusData.error);
+                }
+
+                await delay(YOUTUBE_POLL_INTERVAL_MS);
+            }
+
+            throw new Error('Đã quá thời gian chờ tạo link YouTube, vui lòng thử lại.');
+        }
+
+        function replaceAffiliateId(link, affiliateId) {
+            const parsed = new URL(link);
+            parsed.searchParams.set('affiliate_id', affiliateId);
+            return parsed.toString();
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         function copyResult() {
             if (!generatedLink) return;
             navigator.clipboard.writeText(generatedLink).then(() => {
@@ -429,9 +673,21 @@
             });
         }
 
+        function copyYoutubeResult() {
+            if (!generatedYoutubeLink) return;
+            navigator.clipboard.writeText(generatedYoutubeLink).then(() => {
+                showToast('Đã sao chép link!');
+            });
+        }
+
         function buyNow() {
             if (!generatedLink) return;
             window.open(generatedLink, '_blank', 'noopener,noreferrer');
+        }
+
+        function buyYoutubeNow() {
+            if (!generatedYoutubeLink) return;
+            window.open(generatedYoutubeLink, '_blank', 'noopener,noreferrer');
         }
 
         function pasteFromClipboard() {
@@ -448,6 +704,12 @@
             errorMsg.style.display = 'block';
         }
 
+        function showErrorById(id, msg) {
+            const errorEl = document.getElementById(id);
+            errorEl.textContent = msg;
+            errorEl.style.display = 'block';
+        }
+
         function showToast(msg) {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
@@ -458,6 +720,10 @@
         // Allow pressing Enter to generate
         document.getElementById('productUrl').addEventListener('keydown', function (e) {
             if (e.key === 'Enter') generateLink();
+        });
+
+        document.getElementById('youtubeProductUrl').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') generateYoutubeLink();
         });
     </script>
 </body>
