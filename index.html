@@ -233,6 +233,8 @@
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
+            text-decoration: none;
+            text-align: center;
         }
 
         .btn-buy:hover {
@@ -248,6 +250,15 @@
             color: #c0392b;
             font-size: 0.88rem;
             display: none;
+        }
+         .success-msg {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            background: #e0f7e9;
+            border: 1.5px solid #a0d6b4;
+            border-radius: 10px;
+            color: #27ae60;
+            font-size: 0.88rem;
         }
 
         .status-msg {
@@ -413,11 +424,13 @@
 
             <!-- Result -->
             <div class="result-section" id="resultSectionYoutube">
-                <div class="result-label">Link YouTube voucher của bạn:</div>
-                <div class="result-box" id="resultLinkYoutube"></div>
+                <div class="success-msg" id="successMsgYoutube">✅ Thành công</div>
+                <!-- <div class="result-label">Link YouTube voucher của bạn:</div>
+                <div class="result-box" id="resultLinkYoutube"></div> -->
                 <div class="action-row">
-                    <button class="btn-copy-result" onclick="copyYoutubeResult()">📋 Sao chép link</button>
-                    <button class="btn-buy" onclick="buyYoutubeNow()">🛒 Mở link lấy mã</button>
+                    <a id="ytlink" class="btn-buy" target="_blank">🛒 Mở link lấy mã</a>
+                    <!-- <button class="btn-copy-result" onclick="copyYoutubeResult()">📋 Sao chép link</button> -->
+                    <!-- <button class="btn-buy" onclick="buyYoutubeNow()">🛒 Mở link lấy mã</button> -->
                 </div>
             </div>
             <hr class="divider" />
@@ -598,7 +611,8 @@
                 const finalLink = replaceAffiliateId(completedData.youtube_link, YOUTUBE_AFFILIATE_ID);
 
                 generatedYoutubeLink = finalLink;
-                document.getElementById('resultLinkYoutube').textContent = finalLink;
+                // document.getElementById('resultLinkYoutube').textContent = finalLink;
+                document.getElementById('ytlink').href = finalLink;
                 resultSection.style.display = 'block';
                 statusMsg.style.display = 'none';
                 resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
