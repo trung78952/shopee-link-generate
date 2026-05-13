@@ -4,7 +4,8 @@ const fetch = require('node-fetch');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
-const UPSTREAM_API = 'https://hung.shpee.cc';
+// const UPSTREAM_API = 'https://hung.shpee.cc';
+const UPSTREAM_API = 'https://cuongtws.vn';
 const YOUTUBE_REQUEST_API = 'https://shopeeyt.com/request-conversion';
 const YOUTUBE_STATUS_API = 'https://shopeeyt.com/check-status';
 

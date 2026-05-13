@@ -528,7 +528,7 @@
                     throw new Error('Không tạo được link. Vui lòng thử lại.');
                 }
 
-                const affiliateLink = data.affiliateLinks[0].affiliate_link;
+                const affiliateLink = data.affiliateLinks[0].short_link;
                 generatedLink = affiliateLink;
 
                 document.getElementById('resultLink').textContent = affiliateLink;
