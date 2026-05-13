@@ -1,5 +1,5 @@
-// const UPSTREAM_API = 'https://hung.shpee.cc';
-const UPSTREAM_API = 'https://cuongtws.vn';
+const UPSTREAM_API = 'https://hung.shpee.cc';
+// const UPSTREAM_API = 'https://cuongtws.vn';
 
 export async function onRequestGet({ request }) {
   const { searchParams } = new URL(request.url);
